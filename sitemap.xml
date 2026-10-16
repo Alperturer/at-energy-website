@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://atenergysolutions.nl/</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://atenergysolutions.nl/zonnepanelen</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://atenergysolutions.nl/thuisbatterij</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://atenergysolutions.nl/warmtepomp</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://atenergysolutions.nl/airco</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://atenergysolutions.nl/producten</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://atenergysolutions.nl/zakelijk</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://atenergysolutions.nl/over-ons</loc><lastmod>2026-10-16</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://atenergysolutions.nl/</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/hero-woning.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/zonnepanelen.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/thuisbatterij.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/warmtepomp.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/airco.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/zakelijk.jpg</image:loc></image:image></url>
+  <url><loc>https://atenergysolutions.nl/zonnepanelen</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/zonnepanelen.jpg</image:loc></image:image></url>
+  <url><loc>https://atenergysolutions.nl/thuisbatterij</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/thuisbatterij.jpg</image:loc></image:image></url>
+  <url><loc>https://atenergysolutions.nl/warmtepomp</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/warmtepomp.jpg</image:loc></image:image></url>
+  <url><loc>https://atenergysolutions.nl/airco</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/airco.jpg</image:loc></image:image></url>
+  <url><loc>https://atenergysolutions.nl/producten</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/zonnepanelen.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/thuisbatterij.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/warmtepomp.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/airco.jpg</image:loc></image:image><image:image><image:loc>https://atenergysolutions.nl/assets/img/zakelijk.jpg</image:loc></image:image></url>
+  <url><loc>https://atenergysolutions.nl/zakelijk</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/zakelijk.jpg</image:loc></image:image></url>
+  <url><loc>https://atenergysolutions.nl/over-ons</loc><lastmod>2026-10-16</lastmod><image:image><image:loc>https://atenergysolutions.nl/assets/img/team.jpg</image:loc></image:image></url>
   <url><loc>https://atenergysolutions.nl/veelgestelde-vragen</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://atenergysolutions.nl/kennisbank</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://atenergysolutions.nl/kennisbank/salderingsregeling-stopt</loc><lastmod>2026-10-16</lastmod></url>

@@ -1,14 +1,7 @@
 /* AT Energy Solutions — stylesheet
    Tokens: antraciet, warm wit, turquoise. Eén typeface (Schibsted Grotesk), self-hosted. */
 
-@font-face {
-  font-family: "Schibsted Grotesk";
-  src: url("/assets/fonts/SchibstedGrotesk-Variable.woff2") format("woff2");
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
+/* Lettertype: Schibsted Grotesk wordt gebruikt als die lokaal is geïnstalleerd; anders het systeemlettertype (geen extra download). */
 :root {
   --ink: #1C2124;          /* diep antraciet */
   --ink-2: #262C30;        /* antraciet, verhoogd vlak */
@@ -51,7 +44,7 @@ p { margin: 0 0 1em; }
 ul, ol { padding: 0; margin: 0; }
 
 h1, h2, h3, h4 { margin: 0 0 .5em; font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; text-wrap: balance; }
-h1 { font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.035em; line-height: 1.05; }
+h1 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); letter-spacing: -0.035em; line-height: 1.05; }
 h2 { font-size: clamp(2rem, 4.2vw, 3.4rem); }
 h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); letter-spacing: -0.02em; line-height: 1.15; }
 .lead { font-size: clamp(1.15rem, 1.6vw, 1.35rem); line-height: 1.5; max-width: 34em; }
@@ -528,7 +521,7 @@ legend { padding: 0; }
 @media (min-width: 900px) and (max-height: 900px) {
   .hero-photo { min-height: calc(100vh - 130px); }
   .hero-inner { padding-top: clamp(2.5rem, 6vh, 4rem); padding-bottom: clamp(6rem, 13vh, 7.5rem); }
-  .hero-copy h1 { font-size: clamp(2.1rem, 6vh, 3.3rem); }
+  .hero-copy h1 { font-size: clamp(1.9rem, 5vh, 2.6rem); }
   .hero-copy .lead { font-size: 1.08rem; margin-bottom: 1.4rem; }
   .quick a { padding: 1rem 1.15rem; }
   .q-ico { width: 46px; height: 46px; }
@@ -560,7 +553,7 @@ legend { padding: 0; }
 }
 @media (max-width: 360px) {
   :root { --gut: 1rem; }
-  h1 { font-size: 1.9rem; }
+  h1 { font-size: 1.75rem; }
   .quick strong { font-size: 1rem; }
 }
 /* Vaste actiebalk onderaan op mobiel */
@@ -585,3 +578,15 @@ legend { padding: 0; }
 /* Menu: nooit afbreken over twee regels */
 .nav-list > li > a, .sub-toggle, .nav-cta { white-space: nowrap; }
 @media (min-width: 1281px) and (max-width: 1440px) { .nav-list > li > a, .sub-toggle { padding: .55rem .6rem; } }
+
+/* Auteursblok kennisbank */
+.author-box { display: flex; gap: 1rem; align-items: flex-start; margin: 2.5rem 0 1rem; padding: 1.25rem 1.4rem; background: var(--paper-2); border-radius: var(--r-l); }
+.author-box img { flex: none; border-radius: 14px; }
+.author-box p { margin: 0; font-size: .97rem; }
+.author-box .author-name { font-weight: 700; margin-bottom: .25rem; }
+.posts h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); margin-bottom: .4rem; }
+.posts a:hover h3 { color: var(--mint-deep); }
+
+/* Hero-kop compacter */
+.hero-copy h1 { font-size: clamp(1.9rem, 3.4vw, 2.75rem); max-width: 16em; }
+@media (min-width: 900px) and (max-height: 900px) { .hero-copy h1 { font-size: clamp(1.9rem, 5vh, 2.6rem); } }

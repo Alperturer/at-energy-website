@@ -2,13 +2,14 @@
 """Genereert alle HTML-pagina's, sitemap.xml en robots.txt voor AT Energy Solutions.
 Pas teksten hier aan en draai:  python3 build.py
 Open punten staan als TODO in dit bestand."""
-import json, os, html
+import json, os, html, re
 from datetime import date
 
 BASE = "https://atenergysolutions.nl"   # TODO: definitieve domeinvariant (met/zonder www) bevestigen
 TODAY = date.today().isoformat()
 OUT = os.path.dirname(os.path.abspath(__file__))
 PAGES = []  # (path, noindex)
+PAGE_IMAGES = {}  # path -> [(url, alt)] voor de image-sitemap
 
 EMAIL = "info@atenergysolutions.nl"
 KVK = "24401102"
@@ -104,10 +105,11 @@ def faq_schema(qa):
         {"@type": "Question", "name": strip(q), "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in qa]}
 
 ORG = {
-    "@context": "https://schema.org", "@type": "Electrician", "@id": BASE + "/#bedrijf",
+    "@context": "https://schema.org", "@type": ["Electrician", "HVACBusiness"], "@id": BASE + "/#bedrijf",
+    "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "url": BASE + u}} for n, u in [("Zonnepanelen installeren", "/zonnepanelen"), ("Thuisbatterij installeren", "/thuisbatterij"), ("Warmtepomp installeren", "/warmtepomp"), ("Airco installeren", "/airco"), ("Zakelijke energie-installaties", "/zakelijk")]],
     "name": "AT Energy Solutions", "url": BASE + "/", "email": EMAIL,
     "logo": {"@type": "ImageObject", "url": BASE + "/assets/logo.png", "width": 422, "height": 112}, "image": BASE + "/assets/og-image.jpg",
-    "foundingDate": "2006", "slogan": "Zelf stroom maken, opslaan en slim gebruiken.",
+    "foundingDate": "2006", "slogan": "Je eigen stroom opwekken, opslaan en slim gebruiken.",
     "hasCredential": [{"@type": "EducationalOccupationalCredential", "credentialCategory": "Erkenning", "name": "InstallQ-erkend installateur elektrotechniek en zonnestroom"}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "Certificaat", "name": "BRL 200"}],
     "contactPoint": {"@type": "ContactPoint", "contactType": "customer service", "email": EMAIL, "areaServed": "NL", "availableLanguage": ["nl"]},
     "description": "Al 20 jaar actief in elektra en verduurzaming. InstallQ-erkend elektra- en zonnestroominstallateur uit Nieuwerkerk aan den IJssel voor zonnepanelen, thuisbatterijen, warmtepompen en airco's, voor particulieren en bedrijven.",
@@ -123,7 +125,7 @@ WEBSITE = {"@context": "https://schema.org", "@type": "WebSite", "@id": BASE + "
 
 def service_schema(name, desc, path):
     return {"@context": "https://schema.org", "@type": "Service", "name": name, "description": desc,
-            "serviceType": name, "url": BASE + path, "areaServed": {"@type": "Country", "name": "Nederland"},
+            "serviceType": name, "url": BASE + path, "areaServed": [{"@type": "City", "name": "Nieuwerkerk aan den IJssel"}, {"@type": "AdministrativeArea", "name": "Gemeente Zuidplas"}, {"@type": "Country", "name": "Nederland"}],
             "provider": {"@id": BASE + "/#bedrijf"}}
 
 OG_IMAGE = BASE + "/assets/og-image.jpg"
@@ -131,7 +133,7 @@ AUTHOR = "Redactie AT Energy Solutions"
 fmt = lambda d: date.fromisoformat(d).strftime("%-d %B %Y").replace("January","januari").replace("February","februari").replace("March","maart").replace("April","april").replace("May","mei").replace("June","juni").replace("July","juli").replace("August","augustus").replace("September","september").replace("October","oktober").replace("November","november").replace("December","december")
 
 # ---------- Layout ----------
-PRODUCTS = [("Zonnepanelen", "/zonnepanelen", "Zelf stroom opwekken"), ("Thuisbatterij", "/thuisbatterij", "Zonnestroom bewaren"),
+PRODUCTS = [("Zonnepanelen", "/zonnepanelen", "Je eigen stroom opwekken"), ("Thuisbatterij", "/thuisbatterij", "Zonnestroom bewaren"),
             ("Warmtepomp", "/warmtepomp", "Duurzaam verwarmen"), ("Airco", "/airco", "Koelen en bijverwarmen")]
 NAV = [("Home", "/"), ("Zakelijk", "/zakelijk"), ("Over ons", "/over-ons"), ("Kennisbank", "/kennisbank"), ("Veelgestelde vragen", "/veelgestelde-vragen"), ("Contact", "/contact")]
 
@@ -221,6 +223,11 @@ def page(path, title, desc, body, current=None, schema=None, noindex=False, og_t
         if PAGE_TYPES.get(path) != "FAQPage":
             schema = [wp] + list(schema or [])
     full_title = title if ("AT Energy" in title or len(title) > 53) else f"{title} | AT Energy"
+    imgs = [(BASE + u, alt) for u, alt in re.findall(r'<img[^>]+src="(/assets/img/[a-z-]+\.jpg)"[^>]*alt="([^"]*)"', body)]
+    PAGE_IMAGES[path] = list(dict.fromkeys(imgs))
+    og_img, og_alt, og_w, og_h = (BASE + "/assets/og-image.jpg", "AT Energy Solutions – zonnepanelen, thuisbatterijen, warmtepompen en airco", 1200, 630)
+    if imgs and path not in ("/",):
+        og_img, og_alt = imgs[0]; og_w, og_h = 1200, 800
     ld = "".join(f'\n<script type="application/ld+json">{json.dumps(s, ensure_ascii=False)}</script>' for s in (schema or []))
     robots = '<meta name="robots" content="noindex, follow">' if noindex else '<meta name="robots" content="index, follow, max-image-preview:large">'
     doc = f'''<!doctype html>
@@ -238,8 +245,14 @@ def page(path, title, desc, body, current=None, schema=None, noindex=False, og_t
 <meta property="og:title" content="{html.escape(full_title)}">
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{OG_IMAGE}">
+<meta property="og:image" content="{og_img}">
+<meta property="og:image:width" content="{og_w}">
+<meta property="og:image:height" content="{og_h}">
+<meta property="og:image:alt" content="{html.escape(og_alt)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{html.escape(full_title)}">
+<meta name="twitter:description" content="{html.escape(desc)}">
+<meta name="twitter:image" content="{og_img}">
 <meta name="theme-color" content="#1C2124">
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
@@ -312,7 +325,7 @@ home = f'''<div class="hero-shell"><section class="hero-photo" aria-labelledby="
   {hero_img()}
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <h1 id="hero-t">Zelf stroom maken, opslaan en slim gebruiken.</h1>
+      <h1 id="hero-t">Je eigen stroom opwekken, opslaan en slim gebruiken.</h1>
       <p class="lead">Al 20 jaar actief in elektra en verduurzaming. Als InstallQ-erkend elektra- en zonnestroominstallateur installeren we zonnepanelen, thuisbatterijen, warmtepompen en airco’s voor woningen en bedrijven in Nieuwerkerk aan den IJssel en omgeving.</p>
       <div class="btn-row">
         <a class="btn btn--mint" href="/contact">Vraag een offerte aan</a>
@@ -325,7 +338,7 @@ home = f'''<div class="hero-shell"><section class="hero-photo" aria-labelledby="
 <section class="quick-wrap" aria-label="Kies een oplossing">
   <div class="wrap">
     <ul class="quick">
-      <li><a href="/zonnepanelen"><span class="q-ico">{Q["sun"]}</span><span><strong>Zonnepanelen</strong><span>Zelf stroom opwekken</span></span></a></li>
+      <li><a href="/zonnepanelen"><span class="q-ico">{Q["sun"]}</span><span><strong>Zonnepanelen</strong><span>Je eigen stroom opwekken</span></span></a></li>
       <li><a href="/thuisbatterij"><span class="q-ico">{Q["bat"]}</span><span><strong>Thuisbatterij</strong><span>Zonnestroom bewaren</span></span></a></li>
       <li><a href="/warmtepomp"><span class="q-ico">{Q["heat"]}</span><span><strong>Warmtepomp</strong><span>Duurzaam verwarmen</span></span></a></li>
       <li><a href="/airco"><span class="q-ico">{Q["air"]}</span><span><strong>Airco</strong><span>Koelen en bijverwarmen</span></span></a></li>
@@ -445,6 +458,7 @@ home = f'''<div class="hero-shell"><section class="hero-photo" aria-labelledby="
   </div>
 </section>
 
+<!--KENNISBANK-HOME-->
 <section class="sec sec--alt" aria-labelledby="faq-t">
   <div class="wrap">
     <div class="sec-head"><h2 id="faq-t">Veelgestelde vragen</h2></div>
@@ -454,8 +468,8 @@ home = f'''<div class="hero-shell"><section class="hero-photo" aria-labelledby="
 </section>
 {cta()}'''
 page("/", "Zonnepanelen en thuisbatterij in Nieuwerkerk | AT Energy",
-     "InstallQ-erkend installateur van zonnepanelen, thuisbatterijen, warmtepompen en airco’s in Nieuwerkerk aan den IJssel e.o. 20 jaar ervaring. Vraag een offerte aan.",
-     home, current="/", schema=[ORG, WEBSITE, faq_schema(home_faq)])
+     "InstallQ-erkend installateur van zonnepanelen, thuisbatterijen, warmtepompen en airco’s in Nieuwerkerk aan den IJssel e.o. 20 jaar ervaring. Vraag een offerte.",
+     home, current="/", schema=[ORG, WEBSITE])
 
 # ---------- Dienstpagina's ----------
 SERVICES = {
@@ -482,7 +496,7 @@ SERVICES = {
        ("Moet ik mijn zonnepanelen aanmelden?", "<p>Ja. Zonnepanelen meld je aan bij je netbeheerder via energieleveren.nl. We helpen je daarbij.</p>")]),
  "thuisbatterij": dict(
   name="Thuisbatterij", img="thuisbatterij.svg", alt="Illustratie van een thuisbatterij met omvormer naast de meterkast", ph="thuisbatterij in woning",
-  title="Thuisbatterij laten installeren", desc="Thuisbatterij bij je zonnepanelen: bewaar zonnestroom voor de avond nu de salderingsregeling stopt. Advies, plaatsing en aansluiting door een erkend installateur.",
+  title="Thuisbatterij laten installeren", desc="Thuisbatterij bij je zonnepanelen: bewaar zonnestroom voor de avond nu de salderingsregeling stopt. Advies en plaatsing door een erkend installateur.",
   h1="Je zonnestroom bewaren voor de avond", lead="Zonnepanelen leveren het meest rond het middaguur, terwijl je de meeste stroom ’s avonds gebruikt. Een thuisbatterij overbrugt dat verschil.",
   facts=[("Passende capaciteit", "We kijken naar je opwek en verbruik, zodat je niet betaalt voor capaciteit die je niet gebruikt."),
          ("Veilig geplaatst", "Een geschikte plek met voldoende ventilatie, volgens de voorschriften van de fabrikant."),
@@ -571,7 +585,7 @@ for slug in ORDER:
   {faq_html(s["faq"])}
   <!--RELATED:{slug}-->
   <h2 class="mt-3 h-small">Combineer met</h2>
-  <ul class="related">{others}<li><a href="/zakelijk">Zakelijke oplossingen</a></li></ul>
+  <ul class="related">{others}<li><a href="/zakelijk">Zakelijke oplossingen</a></li><li><a href="/bereken-je-prijs">Bereken je prijs</a></li></ul>
 </div></section>
 {cta()}'''
     page(path, SEO_TITLES[slug], s["desc"], body, current="/producten",
@@ -713,7 +727,7 @@ ARTICLES = [
 <h2>Blijven zonnepanelen interessant?</h2>
 <p>Ja, zonnestroom die je zelf gebruikt, hoef je niet in te kopen. Hoeveel het oplevert, hangt meer dan voorheen af van hoeveel je zelf direct gebruikt. Bij een nieuwe installatie houden we daar in het ontwerp rekening mee.</p>'''),
  dict(slug="hybride-of-volledige-warmtepomp", date="2026-10-15",
-  title="Hybride of volledig elektrische warmtepomp: wat past bij jouw huis?",
+  title="Hybride of volledig elektrische warmtepomp: wat past bij je huis?",
   desc="Het verschil tussen een hybride en een volledig elektrische warmtepomp, en hoe isolatie en afgiftesysteem bepalen welke het beste bij je woning past.",
   intro="Een warmtepomp kan naast je cv-ketel werken of hem helemaal vervangen. Welke keuze verstandig is, hangt vooral af van je woning.",
   body='''<h2>Zo werkt een warmtepomp</h2>
@@ -789,8 +803,14 @@ SOURCES = {
  "hybride-of-volledige-warmtepomp": [("RVO: ISDE-subsidie", "https://www.rvo.nl/subsidies-financiering/isde")],
  "thuisbatterij-plaatsen-waar-op-letten": [("Rijksoverheid: salderingsregeling", "https://www.rijksoverheid.nl/onderwerpen/energie-thuis/salderingsregeling")],
 }
+ABOUT = {"salderingsregeling-stopt": ["Salderingsregeling", "Zonnepanelen", "Terugleververgoeding"],
+         "hybride-of-volledige-warmtepomp": ["Warmtepomp", "Hybride warmtepomp", "Isolatie"],
+         "thuisbatterij-plaatsen-waar-op-letten": ["Thuisbatterij", "Energieopslag"],
+         "netcongestie-bedrijf": ["Netcongestie", "Elektriciteitsnet", "Zakelijke energie"],
+         "zonnepanelen-bedrijfsdak": ["Zonnepanelen", "Bedrijfsdak", "Zakelijke energie"]}
 for a in ARTICLES:
     a.setdefault("sources", SOURCES.get(a["slug"], []))
+    a["about"] = [{"@type": "Thing", "name": t} for t in ABOUT.get(a["slug"], [])]
 
 posts = "".join(f'<li><a href="/kennisbank/{a["slug"]}"><time datetime="{a["date"]}">{fmt(a["date"])}</time><div><h2>{a["title"]}</h2><p>{a["desc"]}</p></div></a></li>' for a in ARTICLES)
 trail = [("Home", "/"), ("Kennisbank", "/kennisbank")]
@@ -801,7 +821,7 @@ body = f'''<section class="page-head"><div class="wrap">{crumbs(trail)}
 {cta()}'''
 page("/kennisbank", "Kennisbank: zonnepanelen, batterijen, warmtepompen",
      "Praktische artikelen over zonnepanelen, thuisbatterijen, warmtepompen, airco’s en het einde van de salderingsregeling.", body, current="/kennisbank",
-     schema=[crumbs_schema(trail)])
+     schema=[crumbs_schema(trail), {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": f"{BASE}/kennisbank/{a['slug']}", "name": a["title"]} for i, a in enumerate(ARTICLES)]}])
 
 def sources_html(src):
     if not src: return ""
@@ -814,14 +834,22 @@ for a in ARTICLES:
   <div class="prose"><h1 class="h1-article">{a["title"]}</h1><p class="lead">{a["intro"]}</p>
   <p class="article-meta">Door de redactie van AT Energy Solutions, gepubliceerd op <time datetime="{a["date"]}">{fmt(a["date"])}</time></p></div>
 </div></section>
-<section class="sec pt-0"><div class="wrap"><div class="prose">{a["body"]}{sources_html(a["sources"])}</div></div></section>
+<section class="sec pt-0"><div class="wrap"><div class="prose">{a["body"]}{sources_html(a["sources"])}
+  <aside class="author-box" aria-label="Over de auteur">
+    <img src="/assets/icon-192.png" alt="" width="56" height="56" loading="lazy">
+    <div><p class="author-name">Geschreven door AT Energy Solutions</p>
+    <p>InstallQ-erkend elektra- en zonnestroominstallateur met BRL 200-certificaat, al 20 jaar actief in elektra en verduurzaming vanuit Nieuwerkerk aan den IJssel. Onze artikelen schrijven we vanuit de praktijk en controleren we aan de hand van officiële bronnen. <a href="/over-ons">Meer over ons</a>.</p></div>
+  </aside>
+  <p class="article-meta">Laatst gecontroleerd: <time datetime="{TODAY}">{fmt(TODAY)}</time></p>
+</div></div></section>
 </article>
 {cta()}'''
     art = {"@context": "https://schema.org", "@type": "Article", "headline": a["title"], "description": a["desc"],
-           "datePublished": a["date"], "dateModified": a["date"], "inLanguage": "nl-NL",
-           "author": {"@type": "Organization", "name": "AT Energy Solutions", "url": BASE + "/"},
+           "datePublished": a["date"], "dateModified": TODAY, "inLanguage": "nl-NL",
+           "author": {"@type": "Organization", "@id": BASE + "/#bedrijf", "name": "AT Energy Solutions", "url": BASE + "/over-ons"},
+           "about": a.get("about", []), "isAccessibleForFree": True,
            "publisher": {"@id": BASE + "/#bedrijf"}, "mainEntityOfPage": BASE + path,
-           "image": OG_IMAGE, "citation": [u for _, u in a["sources"]]}
+           "image": BASE + "/assets/og-image.jpg", "citation": [u for _, u in a["sources"]]}
     page(path, a["title"], a["desc"], body, current="/kennisbank", schema=[art, crumbs_schema(trail)], og_type="article")
 
 # ---------- Lokale pagina ----------
@@ -945,7 +973,7 @@ page("/privacyverklaring", "Privacyverklaring", "Hoe AT Energy Solutions omgaat 
 <h2>Jouw rechten</h2><p>Je hebt het recht om je gegevens in te zien, te laten corrigeren of verwijderen, de verwerking te beperken, bezwaar te maken en je gegevens over te dragen. Stuur je verzoek naar <a href="mailto:{EMAIL}">{EMAIL}</a>. Je hebt ook het recht een klacht in te dienen bij de Autoriteit Persoonsgegevens.</p>
 </div></section>''')
 
-page("/cookieverklaring", "Cookieverklaring", "Welke cookies de website van AT Energy Solutions gebruikt.", f'''<section class="page-head"><div class="wrap prose"><h1>Cookieverklaring</h1><p class="lead">Laatst bijgewerkt: {fmt(TODAY)}</p>
+page("/cookieverklaring", "Cookieverklaring", "Welke cookies de website van AT Energy Solutions gebruikt: geen tracking- of marketingcookies, dus geen cookiebanner nodig.", f'''<section class="page-head"><div class="wrap prose"><h1>Cookieverklaring</h1><p class="lead">Laatst bijgewerkt: {fmt(TODAY)}</p>
 <p>Deze website gebruikt geen analytische, tracking- of marketingcookies en laadt geen externe scripts, lettertypen of video’s van derden. Daarom vragen we geen cookietoestemming.</p>
 <h2>Wijzigingen</h2><p>Voegen we in de toekomst bijvoorbeeld websitestatistieken of ingesloten video’s toe, dan passen we deze verklaring aan en vragen we vooraf toestemming waar de wet dat vereist.</p>
 <p>Vragen? Mail naar <a href="mailto:{EMAIL}">{EMAIL}</a>.</p></div></section>''')
@@ -992,11 +1020,24 @@ def _text(path):
 full = "# AT Energy Solutions – volledige tekst\n\n" + "\n\n---\n\n".join(f"URL: {BASE}{p if p != '/' else '/'}\n\n{_text(p)}" for p, ni in PAGES if not ni)
 open(os.path.join(OUT, "llms-full.txt"), "w", encoding="utf-8").write(full)
 
+# ---------- Kennisbank-blok op de homepage ----------
+latest = sorted(ARTICLES, key=lambda a: a["date"], reverse=True)[:3]
+kb = ('<section class="sec" aria-labelledby="kb-t"><div class="wrap"><div class="sec-head"><h2 id="kb-t">Uit de kennisbank</h2>'
+      '<p class="lead muted">Heldere uitleg over de regels en techniek achter je verduurzaming.</p></div><ul class="posts">'
+      + "".join(f'<li><a href="/kennisbank/{a["slug"]}"><time datetime="{a["date"]}">{fmt(a["date"])}</time><div><h3>{a["title"]}</h3><p>{a["desc"]}</p></div></a></li>' for a in latest)
+      + '</ul><p class="mt-2"><a class="link" href="/kennisbank">Alle artikelen</a></p></div></section>')
+_fp = os.path.join(OUT, "index.html")
+_html = open(_fp, encoding="utf-8").read().replace("<!--KENNISBANK-HOME-->", kb)
+open(_fp, "w", encoding="utf-8").write(_html)
+
 # ---------- Sitemap & robots ----------
 urls = [p for p, ni in PAGES if not ni]
 prio = lambda p: "1.0" if p == "/" else "0.8" if p.count("/") == 1 else "0.6"
-sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
-    f'  <url><loc>{BASE}{p if p != "/" else "/"}</loc><lastmod>{TODAY}</lastmod></url>\n' for p in urls) + '</urlset>\n'
+def _sm_entry(p):
+    imgs = "".join(f"<image:image><image:loc>{html.escape(u)}</image:loc></image:image>" for u, _ in PAGE_IMAGES.get(p, []))
+    return f'  <url><loc>{BASE}{p if p != "/" else "/"}</loc><lastmod>{TODAY}</lastmod>{imgs}</url>\n'
+sm = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
+      + "".join(_sm_entry(p) for p in urls) + '</urlset>\n')
 open(os.path.join(OUT, "sitemap.xml"), "w").write(sm)
 AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "PerplexityBot", "Google-Extended", "Applebot-Extended", "Bingbot"]
 open(os.path.join(OUT, "robots.txt"), "w").write("User-agent: *\nAllow: /\nDisallow: /api/\n\n" + "".join(f"User-agent: {b}\nAllow: /\nDisallow: /api/\n\n" for b in AI_BOTS) + f"Sitemap: {BASE}/sitemap.xml\n")
@@ -1011,6 +1052,7 @@ llms = f"""# AT Energy Solutions
 - [Warmtepomp]({BASE}/warmtepomp): hybride en volledig elektrisch
 - [Airco]({BASE}/airco): koelen en bijverwarmen
 - [Zakelijk]({BASE}/zakelijk): zonnestroom, opslag en elektrotechniek voor bedrijven
+- [Bereken je prijs]({BASE}/bereken-je-prijs): rekentool met indicatieprijs incl. btw en installatie, en Warmtefonds-financiering
 
 ## Bedrijf
 - [Over ons]({BASE}/over-ons)

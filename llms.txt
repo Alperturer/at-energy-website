@@ -8,6 +8,7 @@
 - [Warmtepomp](https://atenergysolutions.nl/warmtepomp): hybride en volledig elektrisch
 - [Airco](https://atenergysolutions.nl/airco): koelen en bijverwarmen
 - [Zakelijk](https://atenergysolutions.nl/zakelijk): zonnestroom, opslag en elektrotechniek voor bedrijven
+- [Bereken je prijs](https://atenergysolutions.nl/bereken-je-prijs): rekentool met indicatieprijs incl. btw en installatie, en Warmtefonds-financiering
 
 ## Bedrijf
 - [Over ons](https://atenergysolutions.nl/over-ons)
@@ -17,7 +18,7 @@
 
 ## Kennisbank
 - [De salderingsregeling stopt in 2027: wat betekent dat voor jou?](https://atenergysolutions.nl/kennisbank/salderingsregeling-stopt): Op 1 januari 2027 stopt de salderingsregeling voor zonnepanelen. Wat verandert er, wat is een terugleververgoeding en wanneer is een thuisbatterij zinvol?
-- [Hybride of volledig elektrische warmtepomp: wat past bij jouw huis?](https://atenergysolutions.nl/kennisbank/hybride-of-volledige-warmtepomp): Het verschil tussen een hybride en een volledig elektrische warmtepomp, en hoe isolatie en afgiftesysteem bepalen welke het beste bij je woning past.
+- [Hybride of volledig elektrische warmtepomp: wat past bij je huis?](https://atenergysolutions.nl/kennisbank/hybride-of-volledige-warmtepomp): Het verschil tussen een hybride en een volledig elektrische warmtepomp, en hoe isolatie en afgiftesysteem bepalen welke het beste bij je woning past.
 - [Een thuisbatterij plaatsen: hier let je op](https://atenergysolutions.nl/kennisbank/thuisbatterij-plaatsen-waar-op-letten): Waar plaats je een thuisbatterij, welke capaciteit past bij je verbruik en hoe sluit je hem aan op bestaande zonnepanelen? Praktische aandachtspunten.
 - [Netcongestie: wat betekent een vol stroomnet voor jouw bedrijf?](https://atenergysolutions.nl/kennisbank/netcongestie-bedrijf): Op veel plekken is het stroomnet vol. Wat netcongestie is, wat het betekent voor je aansluiting en teruglevering, en wat je als ondernemer kunt doen.
 - [Zonnepanelen op een bedrijfsdak: hier let je op](https://atenergysolutions.nl/kennisbank/zonnepanelen-bedrijfsdak): Draagkracht, dakbedekking, brandveiligheid, aansluiting en subsidieregelingen: de belangrijkste aandachtspunten voor zonnepanelen op een bedrijfsdak.
