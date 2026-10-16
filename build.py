@@ -135,7 +135,7 @@ fmt = lambda d: date.fromisoformat(d).strftime("%-d %B %Y").replace("January","j
 # ---------- Layout ----------
 PRODUCTS = [("Zonnepanelen", "/zonnepanelen", "Je eigen stroom opwekken"), ("Thuisbatterij", "/thuisbatterij", "Zonnestroom bewaren"),
             ("Warmtepomp", "/warmtepomp", "Duurzaam verwarmen"), ("Airco", "/airco", "Koelen en bijverwarmen")]
-NAV = [("Home", "/"), ("Zakelijk", "/zakelijk"), ("Over ons", "/over-ons"), ("Kennisbank", "/kennisbank"), ("Veelgestelde vragen", "/veelgestelde-vragen"), ("Contact", "/contact")]
+NAV = [("Home", "/"), ("Zakelijk", "/zakelijk"), ("Over ons", "/over-ons"), ("Kennisbank", "/kennisbank"), ("Vragen", "/veelgestelde-vragen"), ("Contact", "/contact")]
 
 def header(current):
     cur = lambda u: ' aria-current="page"' if current == u else ""
@@ -148,6 +148,8 @@ def header(current):
     items += (f'<li class="has-sub"><button class="sub-toggle{" is-active" if prod_active else ""}" type="button" aria-expanded="false" aria-controls="sub-producten">Producten'
               f'<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>'
               f'<ul id="sub-producten" class="sub">{subs}</ul></li>')
+    calc_ico = '<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="2.5" width="13" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="6" y="5" width="8" height="3" rx="1" fill="currentColor"/><circle cx="7" cy="11.5" r="1.1" fill="currentColor"/><circle cx="10" cy="11.5" r="1.1" fill="currentColor"/><circle cx="13" cy="11.5" r="1.1" fill="currentColor"/><circle cx="7" cy="14.5" r="1.1" fill="currentColor"/><circle cx="10" cy="14.5" r="1.1" fill="currentColor"/><circle cx="13" cy="14.5" r="1.1" fill="currentColor"/></svg>'
+    items += f'<li><a class="nav-calc" href="/bereken-je-prijs"{cur("/bereken-je-prijs")}>{calc_ico}Bereken je prijs</a></li>'
     items += "".join(f'<li><a href="{u}"{cur(u)}>{n}</a></li>' for n, u in rest)
     phone = f'<a href="tel:{PHONE.replace(" ", "")}">{PHONE}</a>' if PHONE else ""
     return f'''<a class="skip" href="#inhoud">Naar de inhoud</a>

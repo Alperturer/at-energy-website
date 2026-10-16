@@ -436,9 +436,9 @@ legend { padding: 0; }
 }
 
 /* Logo */
-.brand img { height: 66px; width: auto; }
-.foot-brand .brand img { height: 60px; }
-@media (max-width: 520px) { .brand img { height: 50px; } }
+.brand img { height: 84px; width: auto; }
+.foot-brand .brand img { height: 72px; }
+@media (max-width: 520px) { .brand img { height: 58px; } }
 /* Bronnen en lees-ook */
 .sources, .readmore { list-style: none; padding-left: 0 !important; display: grid; gap: .5rem; }
 .sources a, .readmore a { color: var(--mint-deep); font-weight: 600; text-underline-offset: 3px; }
@@ -455,7 +455,7 @@ legend { padding: 0; }
 @media (max-width: 760px) { .topbar-usp li:nth-child(n+2) { display: none; } }
 @media (max-width: 460px) { .topbar-contact { display: none; } }
 
-.nav { height: 92px; }
+.nav { height: 108px; }
 .nav-list { gap: .1rem; }
 .nav-list > li > a, .sub-toggle { display: flex; align-items: center; gap: .35rem; padding: .55rem .75rem; font: inherit; font-weight: 600; font-size: .96rem; color: var(--ink); background: none; border: 0; border-radius: 999px; cursor: pointer; text-decoration: none; }
 .nav-list > li > a:hover, .sub-toggle:hover, .sub-toggle[aria-expanded="true"] { background: var(--paper-2); }
@@ -477,7 +477,7 @@ legend { padding: 0; }
 
 @media (max-width: 1280px) {
   .nav-toggle { display: block; }
-  .nav-menu { position: absolute; top: 100%; left: 0; right: 0; height: calc(100dvh - 92px); background: var(--paper); padding: 1rem var(--gut) 3rem; overflow-y: auto; display: none; }
+  .nav-menu { position: absolute; top: 100%; left: 0; right: 0; height: calc(100dvh - 108px); background: var(--paper); padding: 1rem var(--gut) 3rem; overflow-y: auto; display: none; }
   .nav-list .sub a { font-size: 1rem; font-weight: 600; letter-spacing: 0; padding: .65rem .25rem; border: 0; }
   .nav-list .sub-all { border-top: 0; }
   .nav-menu.is-open { display: block; }
@@ -590,6 +590,21 @@ legend { padding: 0; }
 /* Hero-kop compacter */
 .hero-copy h1 { font-size: clamp(1.9rem, 3.4vw, 2.75rem); max-width: 16em; }
 @media (min-width: 900px) and (max-height: 900px) { .hero-copy h1 { font-size: clamp(1.9rem, 5vh, 2.6rem); } }
+
+/* Menu-item rekentool: valt op naast Producten */
+.nav-list > li > a.nav-calc { color: var(--mint-deep); background: #E4F6F4; font-weight: 700; gap: .4rem; }
+.nav-list > li > a.nav-calc svg { width: 18px; height: 18px; flex: none; }
+.nav-list > li > a.nav-calc:hover, .nav-list > li > a.nav-calc[aria-current="page"] { background: #CDEFEC; color: var(--mint-deep); }
+@media (max-width: 1280px) {
+  .nav-list > li > a.nav-calc { background: #E4F6F4; border-radius: 14px; padding: 1rem; margin: .5rem 0; border-bottom: 0; justify-content: flex-start; }
+}
+
+.sub-toggle svg { flex: none; }
+@media (max-width: 520px) { .nav { height: 88px; } .nav-menu { height: calc(100dvh - 88px); } }
+.brand { flex: none; }
+.brand img { object-fit: contain; }
+/* Laptops: "Home" zit al onder het logo, zodat het grotere logo en het menu op één regel passen */
+@media (min-width: 1281px) and (max-width: 1599px) { .nav-list > li:first-child { display: none; } }
 </style></head><body><a class="skip" href="#inhoud">Naar de inhoud</a>
 <div class="topbar"><div class="wrap topbar-in">
   <ul class="topbar-usp"><li>Al 20 jaar actief in elektra en verduurzaming</li><li>InstallQ-erkend elektra- en zonnestroominstallateur</li><li>BRL 200-gecertificeerd</li></ul>
@@ -600,7 +615,7 @@ legend { padding: 0; }
     <a class="brand" href="/" aria-label="AT Energy Solutions, naar de homepage"><img src="/assets/logo.png" alt="AT Energy Solutions" width="422" height="112"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu openen"><span></span></button>
     <nav id="nav-menu" class="nav-menu" aria-label="Hoofdmenu">
-      <ul class="nav-list"><li><a href="/" aria-current="page">Home</a></li><li class="has-sub"><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-producten">Producten<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><ul id="sub-producten" class="sub"><li><a href="/zonnepanelen"><strong>Zonnepanelen</strong><span>Je eigen stroom opwekken</span></a></li><li><a href="/thuisbatterij"><strong>Thuisbatterij</strong><span>Zonnestroom bewaren</span></a></li><li><a href="/warmtepomp"><strong>Warmtepomp</strong><span>Duurzaam verwarmen</span></a></li><li><a href="/airco"><strong>Airco</strong><span>Koelen en bijverwarmen</span></a></li><li><a href="/bereken-je-prijs"><strong>Bereken je prijs</strong><span>Direct een indicatieprijs</span></a></li><li class="sub-all"><a href="/producten">Alle producten bekijken</a></li></ul></li><li><a href="/zakelijk">Zakelijk</a></li><li><a href="/over-ons">Over ons</a></li><li><a href="/kennisbank">Kennisbank</a></li><li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li><li><a href="/contact">Contact</a></li>
+      <ul class="nav-list"><li><a href="/" aria-current="page">Home</a></li><li class="has-sub"><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-producten">Producten<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><ul id="sub-producten" class="sub"><li><a href="/zonnepanelen"><strong>Zonnepanelen</strong><span>Je eigen stroom opwekken</span></a></li><li><a href="/thuisbatterij"><strong>Thuisbatterij</strong><span>Zonnestroom bewaren</span></a></li><li><a href="/warmtepomp"><strong>Warmtepomp</strong><span>Duurzaam verwarmen</span></a></li><li><a href="/airco"><strong>Airco</strong><span>Koelen en bijverwarmen</span></a></li><li><a href="/bereken-je-prijs"><strong>Bereken je prijs</strong><span>Direct een indicatieprijs</span></a></li><li class="sub-all"><a href="/producten">Alle producten bekijken</a></li></ul></li><li><a class="nav-calc" href="/bereken-je-prijs"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="2.5" width="13" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="6" y="5" width="8" height="3" rx="1" fill="currentColor"/><circle cx="7" cy="11.5" r="1.1" fill="currentColor"/><circle cx="10" cy="11.5" r="1.1" fill="currentColor"/><circle cx="13" cy="11.5" r="1.1" fill="currentColor"/><circle cx="7" cy="14.5" r="1.1" fill="currentColor"/><circle cx="10" cy="14.5" r="1.1" fill="currentColor"/><circle cx="13" cy="14.5" r="1.1" fill="currentColor"/></svg>Bereken je prijs</a></li><li><a href="/zakelijk">Zakelijk</a></li><li><a href="/over-ons">Over ons</a></li><li><a href="/kennisbank">Kennisbank</a></li><li><a href="/veelgestelde-vragen">Vragen</a></li><li><a href="/contact">Contact</a></li>
         <li class="nav-cta-li"><a class="btn btn--mint nav-cta" href="/contact">Offerte aanvragen</a></li>
       </ul>
     </nav>
