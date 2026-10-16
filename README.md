@@ -11,3 +11,12 @@ Statische site (losse HTML-bestanden) + één serverless functie voor het contac
 ## Handmatig nog te doen vóór livegang
 1. **Open punten** — zoek in `build.py` op `TODO` (telefoonnummer `PHONE`, reviews `REVIEWS`). Zijn ze leeg, dan verbergt de site die onderdelen automatisch (telefoon, openingstijden, plaatsen in het werkgebied, lokale projecten, review, oprichtingsverhaal, auteur, F-gassen, garantie, offertekosten, reactietermijn). Daarna `python3 build.py`.
 2. **Foto's** — de site gebruikt echte foto's van Unsplash (gratis voor commercieel gebruik, geen naamsvermelding nodig). Ze worden nu geladen vanaf images.unsplash.com. Draai één keer `python3 download_images.py` en daarna `python3 build.py` om ze zelf te hosten. Eigen projectfoto's? Zet ze als `assets/img/<naam>.jpg` (namen staan in `PHOTOS` in build.py) en draai `python3 build.py`.
+
+## Rekentool (/bereken-je-prijs) zelf aanpassen
+Prijzen, merken, modellen, btw en Warmtefonds-rentes staan in Supabase (tabel `rekentool_instellingen`) en worden live geladen.
+1. Open **jouwsite/rekentool#beheer**.
+2. Pas de instellingen aan en controleer ze onder **Voorbeeld**.
+3. Vul je wachtwoord in en klik **Opslaan op website**. Binnen een halve minuut overal live.
+
+Eenmalig nodig in Vercel → Settings → Environment Variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` en `REKENTOOL_WACHTWOORD` (zelf gekozen, minimaal 10 tekens). Daarna **Redeploy**.
+Is de database niet bereikbaar, dan toont de rekentool automatisch de prijzen uit `rekentool.html` (reservekopie via de knop *Reservekopie*).
