@@ -572,7 +572,8 @@ legend { padding: 0; }
 
 /* Rekentool (ingeladen via iframe) */
 .calc-sec { padding-bottom: clamp(3rem, 6vw, 5rem); }
-.calc-frame { display: block; width: 100%; min-height: 900px; border: 0; background: transparent; }
+
+.calc-frame { display: block; width: 100%; height: 1500px; border: 0; background: transparent; }
 @media (max-width: 760px) { .calc-sec .wrap { padding-left: 0; padding-right: 0; } }
 
 /* Menu: nooit afbreken over twee regels */

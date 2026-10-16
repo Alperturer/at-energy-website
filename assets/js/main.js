@@ -132,7 +132,6 @@
   if (!frame) return;
   window.addEventListener("message", function (e) {
     if (e.origin !== location.origin || !e.data || typeof e.data.rekentoolHoogte !== "number") return;
-    frame.style.minHeight = "0";
     frame.style.height = Math.ceil(e.data.rekentoolHoogte) + "px";
   });
 })();

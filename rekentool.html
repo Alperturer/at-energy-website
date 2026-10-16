@@ -185,8 +185,10 @@
   body.beheer-modus .tabstrook{display:none}
   .tabstrook{display:none}
   /* ingebed op de website: geen eigen achtergrond en kop */
-  body.ingebed{background:transparent;overflow:hidden}
-  body.ingebed .wrap{padding-top:8px}
+  body.ingebed{background:transparent}
+  body.ingebed .wrap{padding-top:8px;max-width:none;padding-left:0;padding-right:0}
+  @media (min-width:901px){body.ingebed .wrap{grid-template-columns:1fr 380px;gap:36px}}
+  @media (max-width:900px){body.ingebed .wrap{padding-left:16px;padding-right:16px}}
   body.ingebed header.intro{display:none}
 </style>
 </head>
@@ -1234,7 +1236,7 @@ controleerBeheer();
 if (window.self !== window.top) {
   document.body.classList.add("ingebed");
   $("cta").target = "_top";
-  const meld = () => parent.postMessage({ rekentoolHoogte: Math.ceil(document.body.getBoundingClientRect().height) }, location.origin);
+  const meld = () => parent.postMessage({ rekentoolHoogte: Math.ceil(document.body.getBoundingClientRect().height) }, location.origin === "null" ? "*" : location.origin);
   new ResizeObserver(meld).observe(document.body);
   window.addEventListener("load", meld);
   meld();

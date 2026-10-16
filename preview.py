@@ -34,7 +34,7 @@ document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)
  if(h.charAt(0)==='/'){e.preventDefault();go(h);}else if(h.charAt(0)==='#'){var el=document.getElementById(h.slice(1));if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}}});
 document.addEventListener('submit',function(e){e.preventDefault();var s=document.getElementById('form-status');if(s){s.className='form-status is-ok';s.textContent='Voorbeeldweergave: het formulier verstuurt pas echt na publicatie op Vercel met Resend ingesteld.';s.hidden=false;}});
 var hd=document.querySelector('.site-header');window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',scrollY>8)},{passive:true});
-document.querySelectorAll('header img, footer img').forEach(function(i){var k=i.getAttribute('src');if(IMGS[k])i.src=IMGS[k];});go('/');})();'''
+document.querySelectorAll('header img, footer img').forEach(function(i){var k=i.getAttribute('src');if(IMGS[k])i.src=IMGS[k];});window.addEventListener('message',function(e){var f=document.getElementById('rekentool');if(f&&e.data&&typeof e.data.rekentoolHoogte==='number')f.style.height=Math.ceil(e.data.rekentoolHoogte)+'px';});go('/');})();'''
 tpls = tpls.replace('src="/rekentool"', 'src="rekentool.html"')
 doc = f'<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AT Energy Solutions – voorbeeld</title><style>{css}</style></head><body>{header}<main id="inhoud"></main>{footer}{tpls}<script>{js}</script></body></html>'
 open(out, 'w', encoding='utf-8').write(doc)

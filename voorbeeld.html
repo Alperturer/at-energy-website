@@ -572,7 +572,8 @@ legend { padding: 0; }
 
 /* Rekentool (ingeladen via iframe) */
 .calc-sec { padding-bottom: clamp(3rem, 6vw, 5rem); }
-.calc-frame { display: block; width: 100%; min-height: 900px; border: 0; background: transparent; }
+
+.calc-frame { display: block; width: 100%; height: 1500px; border: 0; background: transparent; }
 @media (max-width: 760px) { .calc-sec .wrap { padding-left: 0; padding-right: 0; } }
 
 /* Menu: nooit afbreken over twee regels */
@@ -1346,4 +1347,4 @@ document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)
  if(h.charAt(0)==='/'){e.preventDefault();go(h);}else if(h.charAt(0)==='#'){var el=document.getElementById(h.slice(1));if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}}});
 document.addEventListener('submit',function(e){e.preventDefault();var s=document.getElementById('form-status');if(s){s.className='form-status is-ok';s.textContent='Voorbeeldweergave: het formulier verstuurt pas echt na publicatie op Vercel met Resend ingesteld.';s.hidden=false;}});
 var hd=document.querySelector('.site-header');window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',scrollY>8)},{passive:true});
-document.querySelectorAll('header img, footer img').forEach(function(i){var k=i.getAttribute('src');if(IMGS[k])i.src=IMGS[k];});go('/');})();</script></body></html>
+document.querySelectorAll('header img, footer img').forEach(function(i){var k=i.getAttribute('src');if(IMGS[k])i.src=IMGS[k];});window.addEventListener('message',function(e){var f=document.getElementById('rekentool');if(f&&e.data&&typeof e.data.rekentoolHoogte==='number')f.style.height=Math.ceil(e.data.rekentoolHoogte)+'px';});go('/');})();</script></body></html>
