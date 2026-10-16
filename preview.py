@@ -8,6 +8,7 @@ pages = {}
 for f in glob.glob('**/*.html', recursive=True):
     if f == out or f.startswith('preview'): continue
     s = open(f, encoding='utf-8').read()
+    if f.startswith(('voorbeeld', 'rekentool')): continue
     route = '/' if f == 'index.html' else '/' + f[:-5]
     pages[route] = (re.search(r'<title>(.*?)</title>', s).group(1), re.search(r'<main id="inhoud">(.*)</main>', s, re.S).group(1))
 idx = open('index.html', encoding='utf-8').read()
@@ -34,6 +35,7 @@ document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)
 document.addEventListener('submit',function(e){e.preventDefault();var s=document.getElementById('form-status');if(s){s.className='form-status is-ok';s.textContent='Voorbeeldweergave: het formulier verstuurt pas echt na publicatie op Vercel met Resend ingesteld.';s.hidden=false;}});
 var hd=document.querySelector('.site-header');window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',scrollY>8)},{passive:true});
 document.querySelectorAll('header img, footer img').forEach(function(i){var k=i.getAttribute('src');if(IMGS[k])i.src=IMGS[k];});go('/');})();'''
+tpls = tpls.replace('src="/rekentool"', 'src="rekentool.html"')
 doc = f'<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AT Energy Solutions – voorbeeld</title><style>{css}</style></head><body>{header}<main id="inhoud"></main>{footer}{tpls}<script>{js}</script></body></html>'
 open(out, 'w', encoding='utf-8').write(doc)
 print(f"Voorbeeld: {out} ({len(pages)} pagina's)")

@@ -125,3 +125,14 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && sub.classList.contains("is-open")) { set(false); btn.focus(); } });
   btn.parentElement.addEventListener("focusout", function (e) { if (!btn.parentElement.contains(e.relatedTarget)) set(false); });
 })();
+
+/* Rekentool: hoogte van de ingeladen rekentool automatisch aanpassen */
+(function () {
+  var frame = document.getElementById("rekentool");
+  if (!frame) return;
+  window.addEventListener("message", function (e) {
+    if (e.origin !== location.origin || !e.data || typeof e.data.rekentoolHoogte !== "number") return;
+    frame.style.minHeight = "0";
+    frame.style.height = Math.ceil(e.data.rekentoolHoogte) + "px";
+  });
+})();

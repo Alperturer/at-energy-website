@@ -570,6 +570,11 @@ legend { padding: 0; }
 }
 /* Respecteer notch / safe areas */
 .site-header .wrap, .topbar .wrap { padding-left: max(var(--gut), env(safe-area-inset-left)); padding-right: max(var(--gut), env(safe-area-inset-right)); }
+
+/* Rekentool (ingeladen via iframe) */
+.calc-sec { padding-bottom: clamp(3rem, 6vw, 5rem); }
+.calc-frame { display: block; width: 100%; min-height: 900px; border: 0; background: transparent; }
+@media (max-width: 760px) { .calc-sec .wrap { padding-left: 0; padding-right: 0; } }
 </style></head><body><a class="skip" href="#inhoud">Naar de inhoud</a>
 <div class="topbar"><div class="wrap topbar-in">
   <ul class="topbar-usp"><li>Al 20 jaar actief in elektra en verduurzaming</li><li>InstallQ-erkend elektra- en zonnestroominstallateur</li><li>BRL 200-gecertificeerd</li></ul>
@@ -580,7 +585,7 @@ legend { padding: 0; }
     <a class="brand" href="/" aria-label="AT Energy Solutions, naar de homepage"><img src="/assets/logo.png" alt="AT Energy Solutions" width="422" height="112"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu openen"><span></span></button>
     <nav id="nav-menu" class="nav-menu" aria-label="Hoofdmenu">
-      <ul class="nav-list"><li><a href="/" aria-current="page">Home</a></li><li class="has-sub"><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-producten">Producten<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><ul id="sub-producten" class="sub"><li><a href="/zonnepanelen"><strong>Zonnepanelen</strong><span>Zelf stroom opwekken</span></a></li><li><a href="/thuisbatterij"><strong>Thuisbatterij</strong><span>Zonnestroom bewaren</span></a></li><li><a href="/warmtepomp"><strong>Warmtepomp</strong><span>Duurzaam verwarmen</span></a></li><li><a href="/airco"><strong>Airco</strong><span>Koelen en bijverwarmen</span></a></li><li class="sub-all"><a href="/producten">Alle producten bekijken</a></li></ul></li><li><a href="/zakelijk">Zakelijk</a></li><li><a href="/over-ons">Over ons</a></li><li><a href="/kennisbank">Kennisbank</a></li><li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li><li><a href="/contact">Contact</a></li>
+      <ul class="nav-list"><li><a href="/" aria-current="page">Home</a></li><li class="has-sub"><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-producten">Producten<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><ul id="sub-producten" class="sub"><li><a href="/zonnepanelen"><strong>Zonnepanelen</strong><span>Zelf stroom opwekken</span></a></li><li><a href="/thuisbatterij"><strong>Thuisbatterij</strong><span>Zonnestroom bewaren</span></a></li><li><a href="/warmtepomp"><strong>Warmtepomp</strong><span>Duurzaam verwarmen</span></a></li><li><a href="/airco"><strong>Airco</strong><span>Koelen en bijverwarmen</span></a></li><li><a href="/bereken-je-prijs"><strong>Bereken je prijs</strong><span>Direct een indicatieprijs</span></a></li><li class="sub-all"><a href="/producten">Alle producten bekijken</a></li></ul></li><li><a href="/zakelijk">Zakelijk</a></li><li><a href="/over-ons">Over ons</a></li><li><a href="/kennisbank">Kennisbank</a></li><li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li><li><a href="/contact">Contact</a></li>
         <li class="nav-cta-li"><a class="btn btn--mint nav-cta" href="/contact">Offerte aanvragen</a></li>
       </ul>
     </nav>
@@ -595,7 +600,7 @@ legend { padding: 0; }
       </div>
       <div>
         <h2>Producten</h2>
-        <ul><li><a href="/zonnepanelen">Zonnepanelen</a></li><li><a href="/thuisbatterij">Thuisbatterij</a></li><li><a href="/warmtepomp">Warmtepomp</a></li><li><a href="/airco">Airco</a></li><li><a href="/zakelijk">Zakelijk</a></li></ul>
+        <ul><li><a href="/zonnepanelen">Zonnepanelen</a></li><li><a href="/thuisbatterij">Thuisbatterij</a></li><li><a href="/warmtepomp">Warmtepomp</a></li><li><a href="/airco">Airco</a></li><li><a href="/zakelijk">Zakelijk</a></li><li><a href="/bereken-je-prijs">Bereken je prijs</a></li></ul>
       </div>
       <div>
         <h2>Bedrijf</h2>
@@ -617,7 +622,7 @@ legend { padding: 0; }
     </div>
   </div>
 </footer><template data-route="/cookieverklaring" data-title="Cookieverklaring | AT Energy">
-<section class="page-head"><div class="wrap prose"><h1>Cookieverklaring</h1><p class="lead">Laatst bijgewerkt: 15 oktober 2026</p>
+<section class="page-head"><div class="wrap prose"><h1>Cookieverklaring</h1><p class="lead">Laatst bijgewerkt: 16 oktober 2026</p>
 <p>Deze website gebruikt geen analytische, tracking- of marketingcookies en laadt geen externe scripts, lettertypen of video’s van derden. Daarom vragen we geen cookietoestemming.</p>
 <h2>Wijzigingen</h2><p>Voegen we in de toekomst bijvoorbeeld websitestatistieken of ingesloten video’s toe, dan passen we deze verklaring aan en vragen we vooraf toestemming waar de wet dat vereist.</p>
 <p>Vragen? Mail naar <a href="mailto:info@atenergysolutions.nl">info@atenergysolutions.nl</a>.</p></div></section>
@@ -642,7 +647,7 @@ legend { padding: 0; }
 <h2>Btw en saldering</h2>
 <p>Voor zonnepanelen op of bij woningen geldt sinds 1 januari 2023 een btw-nultarief op levering en installatie. De salderingsregeling stopt op 1 januari 2027. Daarna wordt zelf verbruiken of opslaan van je zonnestroom belangrijker. <a href="/kennisbank/salderingsregeling-stopt">Lees wat dat voor je betekent</a>.</p>
 <h2>Na de installatie</h2>
-<p>We testen de installatie, laten je zien hoe je de opbrengst volgt en melden je installatie aan via energieleveren.nl, of helpen je daarbij.</p><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-15">15 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
+<p>We testen de installatie, laten je zien hoe je de opbrengst volgt en melden je installatie aan via energieleveren.nl, of helpen je daarbij.</p><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-16">16 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
 <section class="sec sec--alt" id="vragen" aria-labelledby="sfaq-t"><div class="wrap">
   <div class="sec-head"><h2 id="sfaq-t">Vragen over zonnepanelen</h2></div>
   <div class="faq"><details><summary>Is mijn dak geschikt voor zonnepanelen?</summary><div class="answer"><p>De meeste daken zijn geschikt, maar oriëntatie, schaduw en constructie bepalen hoeveel je opwekt. Dat beoordelen we bij de kennismaking, eventueel op basis van foto’s en luchtbeelden.</p></div></details><details><summary>Hoeveel zonnepanelen heb ik nodig?</summary><div class="answer"><p>Dat hangt af van je jaarverbruik, je beschikbare dakoppervlak en je toekomstplannen. We rekenen het voor je situatie uit in de offerte.</p></div></details><details><summary>Moet ik mijn zonnepanelen aanmelden?</summary><div class="answer"><p>Ja. Zonnepanelen meld je aan bij je netbeheerder via energieleveren.nl. We helpen je daarbij.</p></div></details></div>
@@ -740,6 +745,22 @@ legend { padding: 0; }
     <div class="aside-block"><h2>Wat gebeurt er hierna?</h2><p class="mb-0">We lezen je aanvraag, nemen contact op om je situatie door te nemen en sturen daarna een offerte op maat.</p></div>
   </aside>
 </div></section>
+</template><template data-route="/bereken-je-prijs" data-title="Bereken je prijs: thuisbatterij, zonnepanelen en meer | AT Energy">
+<section class="page-head"><div class="wrap"><nav class="crumbs" aria-label="Kruimelpad"><ol><li><a href="/">Home</a></li><li aria-current="page">Bereken je prijs</li></ol></nav>
+  <h1>Bereken je prijs</h1>
+  <p class="lead">Stel je pakket samen met een thuisbatterij, zonnepanelen, een warmtepomp of airco. Je ziet direct een indicatieprijs inclusief installatie.</p>
+</div></section>
+<section class="calc-sec" aria-label="Rekentool"><div class="wrap">
+  <iframe class="calc-frame" id="rekentool" src="rekentool.html" title="Rekentool voor een indicatieprijs" loading="lazy"></iframe>
+  <noscript><p>De rekentool werkt alleen met JavaScript. <a class="link" href="/contact">Vraag direct een offerte aan</a>.</p></noscript>
+</div></section>
+<section class="sec sec--alt" aria-labelledby="cfaq-t"><div class="wrap"><div class="sec-head"><h2 id="cfaq-t">Over de berekening</h2></div><div class="faq"><details><summary>Is de berekende prijs een offerte?</summary><div class="answer"><p>Nee. De rekentool geeft een indicatie op basis van standaardsituaties. Na een kennismaking en het bekijken van je woning of pand ontvang je een offerte op maat.</p></div></details><details><summary>Zijn de prijzen inclusief btw en installatie?</summary><div class="answer"><p>De rekentool toont de prijs inclusief btw en inclusief de standaard installatiekosten. Voor zonnepanelen op woningen geldt het btw-nultarief.</p></div></details><details><summary>Kan ik financieren via het Warmtefonds?</summary><div class="answer"><p>Voor veel verduurzamingsmaatregelen kun je een Energiebespaarlening van het Nationaal Warmtefonds aanvragen. De rekentool laat een indicatie van het maandbedrag zien. De actuele voorwaarden en rentes staan op warmtefonds.nl.</p></div></details></div></div></section>
+<section class="sec--tight" aria-labelledby="cta-t"><div class="wrap">
+  <div class="cta-panel">
+    <div><h2 id="cta-t">Liever een prijs op maat?</h2><p>Elke woning en elk pand is anders. Vertel ons je situatie, dan sturen we een offerte op maat.</p></div>
+    <div class="btn-row"><a class="btn btn--ink" href="/contact">Offerte aanvragen</a><a class="btn btn--line" href="mailto:info@atenergysolutions.nl">Mail ons</a></div>
+  </div>
+</div></section>
 </template><template data-route="/airco" data-title="Airco laten installeren in Nieuwerkerk a/d IJssel | AT Energy">
 <section class="page-head"><div class="wrap">
   <nav class="crumbs" aria-label="Kruimelpad"><ol><li><a href="/">Home</a></li><li><a href="/producten">Producten</a></li><li aria-current="page">Airco</li></ol></nav>
@@ -756,7 +777,7 @@ legend { padding: 0; }
 <h2>Waar we op letten</h2>
 <ul><li><strong>Capaciteit per ruimte:</strong> afgestemd op oppervlak, isolatie en zoninstraling.</li>
 <li><strong>Plaats binnen- en buitenunit:</strong> goede luchtverdeling binnen, voldoende luchtstroom en beperkt geluid buiten.</li>
-<li><strong>Afwerking:</strong> leidingen en condensafvoer zo kort en onopvallend mogelijk, met een nette doorvoer door de gevel.</li></ul><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-15">15 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
+<li><strong>Afwerking:</strong> leidingen en condensafvoer zo kort en onopvallend mogelijk, met een nette doorvoer door de gevel.</li></ul><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-16">16 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
 <section class="sec sec--alt" id="vragen" aria-labelledby="sfaq-t"><div class="wrap">
   <div class="sec-head"><h2 id="sfaq-t">Vragen over airco</h2></div>
   <div class="faq"><details><summary>Kan een airco ook verwarmen?</summary><div class="answer"><p>Ja. De meeste moderne airco’s zijn lucht-lucht-warmtepompen en kunnen efficiënt verwarmen, vooral in het voor- en najaar.</p></div></details><details><summary>Hoeveel ruimtes kan ik op één buitenunit aansluiten?</summary><div class="answer"><p>Met een multi-split-systeem kunnen meerdere binnenunits op één buitenunit. Hoeveel precies, hangt af van het model en de benodigde capaciteit.</p></div></details><details><summary>Heb ik toestemming nodig voor een buitenunit?</summary><div class="answer"><p>Vaak niet, maar in een appartementencomplex (VvE), bij een monument of bij plaatsing aan de voorgevel kunnen regels gelden. Check dit vooraf bij je VvE of gemeente.</p></div></details></div>
@@ -856,7 +877,7 @@ legend { padding: 0; }
       <p class="lead">Al 20 jaar actief in elektra en verduurzaming. Als InstallQ-erkend elektra- en zonnestroominstallateur installeren we zonnepanelen, thuisbatterijen, warmtepompen en airco’s voor woningen en bedrijven in Nieuwerkerk aan den IJssel en omgeving.</p>
       <div class="btn-row">
         <a class="btn btn--mint" href="/contact">Vraag een offerte aan</a>
-        <a class="btn btn--glass" href="/producten">Bekijk onze producten</a>
+        <a class="btn btn--glass" href="/bereken-je-prijs">Bereken je prijs</a>
       </div>
     </div>
   </div>
@@ -1054,7 +1075,7 @@ legend { padding: 0; }
 <h2>Waar we op letten</h2>
 <ul><li>De plaatsingslocatie: temperatuur, ventilatie en bereikbaarheid.</li>
 <li>De capaciteit van je meterkast en hoofdaansluiting.</li>
-<li>Of de batterij kan samenwerken met je bestaande omvormer en eventuele warmtepomp.</li></ul><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-15">15 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
+<li>Of de batterij kan samenwerken met je bestaande omvormer en eventuele warmtepomp.</li></ul><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-16">16 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
 <section class="sec sec--alt" id="vragen" aria-labelledby="sfaq-t"><div class="wrap">
   <div class="sec-head"><h2 id="sfaq-t">Vragen over thuisbatterij</h2></div>
   <div class="faq"><details><summary>Kan ik een thuisbatterij bij mijn bestaande zonnepanelen laten plaatsen?</summary><div class="answer"><p>Meestal wel. Met een AC-gekoppelde batterij hoeft je bestaande installatie niet aangepast te worden. Is je omvormer oud, dan kan een hybride omvormer handiger zijn.</p></div></details><details><summary>Hoe groot moet mijn thuisbatterij zijn?</summary><div class="answer"><p>Dat hangt af van hoeveel stroom je overdag overhoudt en ’s avonds gebruikt. Te groot is zonde van het geld, te klein benut je overschot niet. We berekenen het op basis van je verbruik.</p></div></details><details><summary>Waar wordt een thuisbatterij geplaatst?</summary><div class="answer"><p>Meestal in een berging, bijkeuken, garage of meterkastruimte. De fabrikant schrijft voor welke temperatuur en ventilatie nodig is; we kiezen daar samen een geschikte plek op.</p></div></details></div>
@@ -1087,7 +1108,7 @@ legend { padding: 0; }
 <li><strong>Elektrische installatie:</strong> een aparte groep, en soms een verzwaring van de aansluiting.</li>
 <li><strong>Combinatie met zonnepanelen:</strong> eigen zonnestroom gebruiken voor de warmtepomp.</li></ul>
 <h2>Subsidie</h2>
-<p>Voor warmtepompen is vaak subsidie mogelijk via de ISDE-regeling van de Rijksdienst voor Ondernemend Nederland (RVO). Bedragen en voorwaarden wijzigen periodiek; kijk voor de actuele situatie op rvo.nl. We vermelden in de offerte of het voorgestelde toestel op de meldcodelijst staat.</p><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-15">15 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
+<p>Voor warmtepompen is vaak subsidie mogelijk via de ISDE-regeling van de Rijksdienst voor Ondernemend Nederland (RVO). Bedragen en voorwaarden wijzigen periodiek; kijk voor de actuele situatie op rvo.nl. We vermelden in de offerte of het voorgestelde toestel op de meldcodelijst staat.</p><p class="article-meta">Laatst bijgewerkt: <time datetime="2026-10-16">16 oktober 2026</time>, door de redactie van AT Energy Solutions</p></div></div></section>
 <section class="sec sec--alt" id="vragen" aria-labelledby="sfaq-t"><div class="wrap">
   <div class="sec-head"><h2 id="sfaq-t">Vragen over warmtepomp</h2></div>
   <div class="faq"><details><summary>Is mijn huis geschikt voor een warmtepomp?</summary><div class="answer"><p>Voor een hybride warmtepomp zijn de meeste woningen geschikt. Voor een volledig elektrische warmtepomp is goede isolatie nodig. We beoordelen dit bij de kennismaking.</p></div></details><details><summary>Maakt een warmtepomp geluid?</summary><div class="answer"><p>De buitenunit maakt geluid, vooral bij hoge belasting. Daarom kiezen we zorgvuldig de plaats en houden we rekening met de afstand tot buren en de geldende geluidsregels.</p></div></details><details><summary>Krijg ik subsidie op een warmtepomp?</summary><div class="answer"><p>Vaak wel, via de ISDE-regeling van RVO. Voorwaarden en bedragen veranderen, dus check rvo.nl voor de actuele situatie.</p></div></details></div>
@@ -1102,12 +1123,12 @@ legend { padding: 0; }
   </div>
 </div></section>
 </template><template data-route="/privacyverklaring" data-title="Privacyverklaring | AT Energy">
-<section class="page-head"><div class="wrap prose"><h1>Privacyverklaring</h1><p class="lead">Laatst bijgewerkt: 15 oktober 2026</p><div class="note"><p><strong>Let op:</strong> dit is een conceptversie. Laat deze tekst controleren en vul de gemarkeerde gegevens aan voordat de site live gaat.</p></div>
+<section class="page-head"><div class="wrap prose"><h1>Privacyverklaring</h1><p class="lead">Laatst bijgewerkt: 16 oktober 2026</p><div class="note"><p><strong>Let op:</strong> dit is een conceptversie. Laat deze tekst controleren en vul de gemarkeerde gegevens aan voordat de site live gaat.</p></div>
 <h2>Wie zijn wij</h2><p>AT Energy Solutions, ingeschreven bij de KvK onder nummer 24401102, gevestigd op Hoofdweg Noord 11, 2913 LB Nieuwerkerk aan den IJssel, is verantwoordelijk voor de verwerking van persoonsgegevens zoals beschreven in deze verklaring. Contact: <a href="mailto:info@atenergysolutions.nl">info@atenergysolutions.nl</a>.</p>
 <h2>Welke gegevens we verwerken</h2><p>Als je het contactformulier invult, verwerken we je naam, e-mailadres, postcode, je bericht, je interesse en, als je dat invult, je telefoonnummer. Als je klant wordt, verwerken we ook gegevens die nodig zijn voor offerte, uitvoering en facturatie, zoals je adres.</p>
 <h2>Waarom we die gegevens verwerken</h2><ul><li>Om je aanvraag te beantwoorden en een offerte op te stellen (precontractuele maatregelen / gerechtvaardigd belang).</li><li>Om een overeenkomst uit te voeren (uitvoering overeenkomst).</li><li>Om te voldoen aan wettelijke verplichtingen, zoals de fiscale bewaarplicht.</li></ul>
 <h2>Hoe lang we gegevens bewaren</h2><p>Aanvragen die niet leiden tot een opdracht bewaren we maximaal 12 maanden. Klant- en factuurgegevens bewaren we zolang de wet dat voorschrijft (fiscaal in de regel 7 jaar).</p>
-<h2>Met wie we gegevens delen</h2><p>We verkopen je gegevens niet. We schakelen dienstverleners in die gegevens namens ons verwerken, zoals onze hostingpartij (Vercel) en e-maildienst (Resend). Met hen sluiten we waar nodig een verwerkersovereenkomst. Deze partijen kunnen gegevens buiten de EU verwerken; dat gebeurt dan op basis van passende waarborgen.</p>
+<h2>Met wie we gegevens delen</h2><p>We verkopen je gegevens niet. We schakelen dienstverleners in die gegevens namens ons verwerken, zoals onze hostingpartij (Vercel), databasedienst (Supabase, servers in de EU) en e-maildienst (Resend). Met hen sluiten we waar nodig een verwerkersovereenkomst. Deze partijen kunnen gegevens buiten de EU verwerken; dat gebeurt dan op basis van passende waarborgen.</p>
 <h2>Cookies</h2><p>Deze website plaatst geen tracking- of marketingcookies. Zie de <a href="/cookieverklaring">cookieverklaring</a>.</p>
 <h2>Beveiliging</h2><p>De website werkt uitsluitend via een beveiligde HTTPS-verbinding. Formulierinvoer wordt aan de serverzijde gecontroleerd en niet in de browser opgeslagen.</p>
 <h2>Jouw rechten</h2><p>Je hebt het recht om je gegevens in te zien, te laten corrigeren of verwijderen, de verwerking te beperken, bezwaar te maken en je gegevens over te dragen. Stuur je verzoek naar <a href="mailto:info@atenergysolutions.nl">info@atenergysolutions.nl</a>. Je hebt ook het recht een klacht in te dienen bij de Autoriteit Persoonsgegevens.</p>

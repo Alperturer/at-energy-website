@@ -139,6 +139,7 @@ def header(current):
     cur = lambda u: ' aria-current="page"' if current == u else ""
     prod_active = current == "/producten"
     subs = "".join(f'<li><a href="{u}"{cur(u)}><strong>{n}</strong><span>{d}</span></a></li>' for n, u, d in PRODUCTS)
+    subs += f'<li><a href="/bereken-je-prijs"{cur("/bereken-je-prijs")}><strong>Bereken je prijs</strong><span>Direct een indicatieprijs</span></a></li>'
     subs += '<li class="sub-all"><a href="/producten">Alle producten bekijken</a></li>'
     home, rest = NAV[0], NAV[1:]
     items = f'<li><a href="{home[1]}"{cur(home[1])}>{home[0]}</a></li>'
@@ -175,7 +176,7 @@ def footer():
       </div>
       <div>
         <h2>Producten</h2>
-        <ul><li><a href="/zonnepanelen">Zonnepanelen</a></li><li><a href="/thuisbatterij">Thuisbatterij</a></li><li><a href="/warmtepomp">Warmtepomp</a></li><li><a href="/airco">Airco</a></li><li><a href="/zakelijk">Zakelijk</a></li></ul>
+        <ul><li><a href="/zonnepanelen">Zonnepanelen</a></li><li><a href="/thuisbatterij">Thuisbatterij</a></li><li><a href="/warmtepomp">Warmtepomp</a></li><li><a href="/airco">Airco</a></li><li><a href="/zakelijk">Zakelijk</a></li><li><a href="/bereken-je-prijs">Bereken je prijs</a></li></ul>
       </div>
       <div>
         <h2>Bedrijf</h2>
@@ -315,7 +316,7 @@ home = f'''<div class="hero-shell"><section class="hero-photo" aria-labelledby="
       <p class="lead">Al 20 jaar actief in elektra en verduurzaming. Als InstallQ-erkend elektra- en zonnestroominstallateur installeren we zonnepanelen, thuisbatterijen, warmtepompen en airco’s voor woningen en bedrijven in Nieuwerkerk aan den IJssel en omgeving.</p>
       <div class="btn-row">
         <a class="btn btn--mint" href="/contact">Vraag een offerte aan</a>
-        <a class="btn btn--glass" href="/producten">Bekijk onze producten</a>
+        <a class="btn btn--glass" href="/bereken-je-prijs">Bereken je prijs</a>
       </div>
     </div>
   </div>
@@ -860,6 +861,29 @@ body = f"""<section class="page-head"><div class="wrap">{crumbs(trail)}
 page("/installateur-nieuwerkerk-aan-den-ijssel", "Installateur in Nieuwerkerk aan den IJssel",
      "InstallQ-erkend installateur in Nieuwerkerk aan den IJssel (Zuidplas) voor zonnepanelen, thuisbatterijen, warmtepompen en airco’s in de regio.",
      body, schema=[ORG, crumbs_schema(trail), faq_schema(loc_faq)])
+
+# ---------- Rekentool (prijsindicatie) ----------
+# De rekentool zelf staat in rekentool.html en wordt hier ingeladen.
+# Prijzen en modellen pas je aan via /rekentool#beheer (zie README).
+calc_faq = [
+ ("Is de berekende prijs een offerte?", "<p>Nee. De rekentool geeft een indicatie op basis van standaardsituaties. Na een kennismaking en het bekijken van je woning of pand ontvang je een offerte op maat.</p>"),
+ ("Zijn de prijzen inclusief btw en installatie?", "<p>De rekentool toont de prijs inclusief btw en inclusief de standaard installatiekosten. Voor zonnepanelen op woningen geldt het btw-nultarief.</p>"),
+ ("Kan ik financieren via het Warmtefonds?", "<p>Voor veel verduurzamingsmaatregelen kun je een Energiebespaarlening van het Nationaal Warmtefonds aanvragen. De rekentool laat een indicatie van het maandbedrag zien. De actuele voorwaarden en rentes staan op warmtefonds.nl.</p>"),
+]
+trail = [("Home", "/"), ("Bereken je prijs", "/bereken-je-prijs")]
+body = f"""<section class="page-head"><div class="wrap">{crumbs(trail)}
+  <h1>Bereken je prijs</h1>
+  <p class="lead">Stel je pakket samen met een thuisbatterij, zonnepanelen, een warmtepomp of airco. Je ziet direct een indicatieprijs inclusief installatie.</p>
+</div></section>
+<section class="calc-sec" aria-label="Rekentool"><div class="wrap">
+  <iframe class="calc-frame" id="rekentool" src="/rekentool" title="Rekentool voor een indicatieprijs" loading="lazy"></iframe>
+  <noscript><p>De rekentool werkt alleen met JavaScript. <a class="link" href="/contact">Vraag direct een offerte aan</a>.</p></noscript>
+</div></section>
+<section class="sec sec--alt" aria-labelledby="cfaq-t"><div class="wrap"><div class="sec-head"><h2 id="cfaq-t">Over de berekening</h2></div>{faq_html(calc_faq)}</div></section>
+{cta("Liever een prijs op maat?", "Elke woning en elk pand is anders. Vertel ons je situatie, dan sturen we een offerte op maat.")}"""
+page("/bereken-je-prijs", "Bereken je prijs: thuisbatterij, zonnepanelen en meer",
+     "Bereken direct een indicatieprijs voor een thuisbatterij, zonnepanelen, warmtepomp of airco, inclusief installatie en financiering via het Warmtefonds.",
+     body, current="/bereken-je-prijs", schema=[crumbs_schema(trail), faq_schema(calc_faq)])
 
 # ---------- Contact ----------
 choices = "".join(f'<label class="choice"><input type="checkbox" name="interesse" value="{v}"><span>{l}</span></label>'

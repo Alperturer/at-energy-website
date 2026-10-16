@@ -7,7 +7,7 @@ URL: https://atenergysolutions.nl/
  Al 20 jaar actief in elektra en verduurzaming. Als InstallQ-erkend elektra- en zonnestroominstallateur installeren we zonnepanelen, thuisbatterijen, warmtepompen en airco’s voor woningen en bedrijven in Nieuwerkerk aan den IJssel en omgeving.
 
  Vraag een offerte aan 
- Bekijk onze producten 
+ Bereken je prijs 
 
 - Zonnepanelen Zelf stroom opwekken 
  
@@ -1000,6 +1000,30 @@ URL: https://atenergysolutions.nl/installateur-nieuwerkerk-aan-den-ijssel
 ## Benieuwd wat past bij jouw situatie?
 
  Vertel ons kort over je woning of bedrijfspand. We nemen contact op om je situatie door te nemen en sturen daarna een offerte op maat.
+
+ Offerte aanvragen Mail ons
+
+---
+
+URL: https://atenergysolutions.nl/bereken-je-prijs
+
+## Bereken je prijs
+
+ Stel je pakket samen met een thuisbatterij, zonnepanelen, een warmtepomp of airco. Je ziet direct een indicatieprijs inclusief installatie.
+
+ De rekentool werkt alleen met JavaScript. Vraag direct een offerte aan .
+
+## Over de berekening
+
+ Is de berekende prijs een offerte? Nee. De rekentool geeft een indicatie op basis van standaardsituaties. Na een kennismaking en het bekijken van je woning of pand ontvang je een offerte op maat.
+
+ Zijn de prijzen inclusief btw en installatie? De rekentool toont de prijs inclusief btw en inclusief de standaard installatiekosten. Voor zonnepanelen op woningen geldt het btw-nultarief.
+
+ Kan ik financieren via het Warmtefonds? Voor veel verduurzamingsmaatregelen kun je een Energiebespaarlening van het Nationaal Warmtefonds aanvragen. De rekentool laat een indicatie van het maandbedrag zien. De actuele voorwaarden en rentes staan op warmtefonds.nl.
+
+## Liever een prijs op maat?
+
+ Elke woning en elk pand is anders. Vertel ons je situatie, dan sturen we een offerte op maat.
 
  Offerte aanvragen Mail ons
 

@@ -2,8 +2,8 @@
 """Controleert de gebouwde site: interne links, JSON-LD, één H1, title/description, geen inline styles."""
 import re, glob, os, json, sys
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-files = [f for f in glob.glob("**/*.html", recursive=True) if not f.startswith(("preview", "node_modules"))]
-routes = {"/" if f == "index.html" else "/" + f[:-5] for f in files}
+files = [f for f in glob.glob("**/*.html", recursive=True) if not f.startswith(("preview", "node_modules", "voorbeeld", "rekentool"))]
+routes = {"/" if f == "index.html" else "/" + f[:-5] for f in files} | {"/rekentool"}
 errors = []
 for f in files:
     s = open(f, encoding="utf-8").read()

@@ -576,3 +576,8 @@ legend { padding: 0; }
 }
 /* Respecteer notch / safe areas */
 .site-header .wrap, .topbar .wrap { padding-left: max(var(--gut), env(safe-area-inset-left)); padding-right: max(var(--gut), env(safe-area-inset-right)); }
+
+/* Rekentool (ingeladen via iframe) */
+.calc-sec { padding-bottom: clamp(3rem, 6vw, 5rem); }
+.calc-frame { display: block; width: 100%; min-height: 900px; border: 0; background: transparent; }
+@media (max-width: 760px) { .calc-sec .wrap { padding-left: 0; padding-right: 0; } }
