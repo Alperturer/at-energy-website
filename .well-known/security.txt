@@ -1,0 +1,4 @@
+Contact: mailto:info@atenergysolutions.nl
+Preferred-Languages: nl, en
+Canonical: https://atenergysolutions.nl/.well-known/security.txt
+Expires: 2027-12-31T23:00:00.000Z
