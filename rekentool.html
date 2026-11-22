@@ -682,10 +682,10 @@
     }
   },
   "warmtefonds": {
-    "rente10": 0.044,
-    "rente15": 0.0472,
-    "rente20": 0.0481,
-    "peildatum": "1 oktober 2026",
+    "rente10": 0.046,
+    "rente15": 0.0493,
+    "rente20": 0.0502,
+    "peildatum": "12 oktober 2026",
     "inkomensgrens": 60000,
     "minLening": 1000,
     "maxLening": 29000,
@@ -931,10 +931,14 @@ function renderFinanciering(delen) {
     `Financiering Warmtefonds (${laag ? "inkomen onder grens: 0% rente" : "reguliere rente"}):`];
   let goedkoopste = null;
 
+  // Regel Warmtefonds: 20 jaar kan bij een leenbedrag van méér dan € 15.000.
+  // Vast in de code, zodat een afwijkende waarde in de instellingen dit niet kan blokkeren.
+  const grens20 = Math.min(Number(W.twintigJaarVanaf) || 15000, 15000);
+  const batBedrag = onderdelen.find(([n]) => n === "Thuisbatterij")?.[1] || 0;
   const kaarten = [10, 15, 20].map(jaren => {
     let reden = "";
-    if (jaren === 20 && lening <= (W.twintigJaarVanaf ?? 15000)) reden = `20 jaar is alleen mogelijk bij een leenbedrag boven ${euro(W.twintigJaarVanaf ?? 15000)}.`;
-    else if (jaren === 20 && batAandeel > 1 / 3) reden = "Is de thuisbatterij meer dan een derde van het leenbedrag, dan is de looptijd maximaal 15 jaar.";
+    if (jaren === 20 && lening <= grens20) reden = `20 jaar is mogelijk bij een leenbedrag boven ${euro(grens20)}. Uw leenbedrag is nu ${euro(lening)}.`;
+    else if (jaren === 20 && batAandeel > 1 / 3) reden = `De thuisbatterij (${euro(batBedrag)}) is meer dan een derde van het leenbedrag (${euro(lening)}). Dan is de looptijd maximaal 15 jaar. 20 jaar kan vanaf een totaal leenbedrag van ${euro(batBedrag * 3)}.`;
     const rente = laag ? 0 : (W["rente" + jaren] ?? 0);
     if (reden) return `<div class="fin-kaart nvt"><h3>${jaren} jaar</h3><p>${reden}</p></div>`;
     const totaalMaand = maandlast(lening, jaren, rente);
@@ -957,6 +961,11 @@ function renderFinanciering(delen) {
   if (delen.batterij > batLeen) noten.push(`Voor een thuisbatterij leent u maximaal ${euro(W.maxBatterij ?? 8500)}.`);
   if (eigen > 0) noten.push(`Eigen bijdrage, direct te betalen: <strong>${euro(eigen)}</strong> (boven het maximum van het Warmtefonds).`);
   if (delen.ac > 0) noten.push(`Airco valt niet onder het Warmtefonds: <strong>${euro(delen.ac)}</strong> betaalt u direct.`);
+  noten.push("Alle bedragen zijn inclusief btw: 21% op thuisbatterij en warmtepomp, 0% op zonnepanelen op een woning. U leent en betaalt dus het bedrag inclusief btw.");
+  if (delen.batterij > 0 && (CONFIG.btwBatterij ?? 0.21) > 0) {
+    const btwBat = delen.batterij - delen.batterij / (1 + (CONFIG.btwBatterij ?? 0.21));
+    noten.push(`Zet u de thuisbatterij in voor handel in stroom (bijvoorbeeld met een dynamisch contract), dan kunt u de btw van ongeveer <strong>${euro(btwBat)}</strong> mogelijk achteraf terugvragen bij de Belastingdienst. Die teruggave komt later en verlaagt het leenbedrag niet.`);
+  }
   noten.push(laag ? "0% rente geldt bij een (gezamenlijk) verzamelinkomen onder de grens. Het Warmtefonds toetst dit bij uw aanvraag."
                   : `Rentetarieven Warmtefonds per ${esc(W.peildatum || "")}. De rente staat vast voor de hele looptijd.`);
   noten.push("Indicatie. Het Warmtefonds beoordeelt uw aanvraag en stelt het definitieve aanbod op.");
