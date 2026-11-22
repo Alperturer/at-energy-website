@@ -961,6 +961,11 @@ function renderFinanciering(delen) {
   if (delen.batterij > batLeen) noten.push(`Voor een thuisbatterij leent u maximaal ${euro(W.maxBatterij ?? 8500)}.`);
   if (eigen > 0) noten.push(`Eigen bijdrage, direct te betalen: <strong>${euro(eigen)}</strong> (boven het maximum van het Warmtefonds).`);
   if (delen.ac > 0) noten.push(`Airco valt niet onder het Warmtefonds: <strong>${euro(delen.ac)}</strong> betaalt u direct.`);
+  noten.push("Alle bedragen zijn inclusief btw: 21% op thuisbatterij en warmtepomp, 0% op zonnepanelen op een woning. U leent en betaalt dus het bedrag inclusief btw.");
+  if (delen.batterij > 0 && (CONFIG.btwBatterij ?? 0.21) > 0) {
+    const btwBat = delen.batterij - delen.batterij / (1 + (CONFIG.btwBatterij ?? 0.21));
+    noten.push(`Zet u de thuisbatterij in voor handel in stroom (bijvoorbeeld met een dynamisch contract), dan kunt u de btw van ongeveer <strong>${euro(btwBat)}</strong> mogelijk achteraf terugvragen bij de Belastingdienst. Die teruggave komt later en verlaagt het leenbedrag niet.`);
+  }
   noten.push(laag ? "0% rente geldt bij een (gezamenlijk) verzamelinkomen onder de grens. Het Warmtefonds toetst dit bij uw aanvraag."
                   : `Rentetarieven Warmtefonds per ${esc(W.peildatum || "")}. De rente staat vast voor de hele looptijd.`);
   noten.push("Indicatie. Het Warmtefonds beoordeelt uw aanvraag en stelt het definitieve aanbod op.");
